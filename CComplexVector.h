@@ -12,6 +12,7 @@ private:
 public:
 
     CComplexVector(int dim);
+    CComplexVector(const CComplexVector& other);
     ~CComplexVector();
 
     int Get_Re(int i);

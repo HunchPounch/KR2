@@ -17,7 +17,27 @@ CComplexVector::CComplexVector(int dim){
         n = dim;
     }
 
+CComplexVector::CComplexVector(const CComplexVector& other) {
+    this->n = other.n;
+    arr = new int* [this->n];
+    if (arr == NULL) {
+        exit(1);
+    }
+    for (int i = 0;i < this->n; i++) {
+        arr[i] = new int[2]();
+        if (arr[i] == NULL) {
+            exit(2);
+        }
+    }
+    
+    for (int i = 0; i < this->n; i++) {
+        this->arr[i][0] = other.arr[i][0];
+        this->arr[i][1] = other.arr[i][1];
+    }
+    
+}
 CComplexVector::~CComplexVector(){
+
 
    for(int i=0; i<n; i++){
       delete[] arr[i];
@@ -52,16 +72,18 @@ CComplexVector& CComplexVector::operator =(const CComplexVector &other){
 }
 
 CComplexVector operator +(CComplexVector &A, CComplexVector &B){
-
+    if (A.n != B.n)exit(2);
     CComplexVector C(A.n);
 
     for(int i=0;i<A.n; i++){
         C.Set_Re_Im(A.Get_Re(i)+B.Get_Re(i), A.Get_Im(i)+B.Get_Im(i),i);
     }
+   
     return C;
 }
 
 CComplexVector operator -(CComplexVector &A, CComplexVector &B){
+    if (A.n != B.n)exit(1);
     CComplexVector C(A.n);
     for(int i=0;i<A.n; i++){
         C.Set_Re_Im(A.Get_Re(i)- B.Get_Re(i), A.Get_Im(i) - B.Get_Im(i),i);
@@ -70,6 +92,7 @@ CComplexVector operator -(CComplexVector &A, CComplexVector &B){
 }
 
 CComplexVector operator *(CComplexVector &A, CComplexVector &B){
+    if (A.n != B.n)exit(3);
     CComplexVector C(A.n);
     for(int i=0;i<A.n; i++){
         C.Set_Re_Im(A.Get_Re(i)*B.Get_Re(i) - A.Get_Im(i)*B.Get_Im(i), A.Get_Re(i)*B.Get_Im(i) + A.Get_Im(i)*B.Get_Re(i),i );
