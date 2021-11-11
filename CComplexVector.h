@@ -24,7 +24,7 @@ public:
     CComplexVector& operator =(const CComplexVector &other);
     friend CComplexVector operator +(CComplexVector &A, CComplexVector &B);
     friend CComplexVector operator -(CComplexVector &A, CComplexVector &B);
-    friend CComplexVector operator *(CComplexVector &A, CComplexVector &B);
+    friend std::pair<int,int> operator *(CComplexVector &A, CComplexVector &B);
 
 
 

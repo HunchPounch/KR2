@@ -29,12 +29,12 @@ CComplexVector::CComplexVector(const CComplexVector& other) {
             exit(2);
         }
     }
-    
+
     for (int i = 0; i < this->n; i++) {
         this->arr[i][0] = other.arr[i][0];
         this->arr[i][1] = other.arr[i][1];
     }
-    
+
 }
 CComplexVector::~CComplexVector(){
 
@@ -64,6 +64,7 @@ void CComplexVector::print(int i){
 }
 
 CComplexVector& CComplexVector::operator =(const CComplexVector &other){
+    if (this->n != other.n)exit(1);
     for(int i=0; i<this->n; i++){
         this->arr[i][0] = other.arr[i][0];
         this->arr[i][1] = other.arr[i][1];
@@ -78,7 +79,7 @@ CComplexVector operator +(CComplexVector &A, CComplexVector &B){
     for(int i=0;i<A.n; i++){
         C.Set_Re_Im(A.Get_Re(i)+B.Get_Re(i), A.Get_Im(i)+B.Get_Im(i),i);
     }
-   
+
     return C;
 }
 
@@ -90,14 +91,26 @@ CComplexVector operator -(CComplexVector &A, CComplexVector &B){
     }
     return C;
 }
+///////////////////////////////
+///////////////////////////////////////////
+////////////////////////////////////
+  ////   /////////////
+   ////////////////
+   ///////////////////////////////// / / / / / // /
 
-CComplexVector operator *(CComplexVector &A, CComplexVector &B){
+///////////////////////////
+////////////////////////////////
+///////////////////////
+std::pair<int,int> operator *(CComplexVector &A, CComplexVector &B){
     if (A.n != B.n)exit(3);
-    CComplexVector C(A.n);
+    std:pair<int,int> retPair;
+    //CComplexVector C(A.n);
     for(int i=0;i<A.n; i++){
-        C.Set_Re_Im(A.Get_Re(i)*B.Get_Re(i) - A.Get_Im(i)*B.Get_Im(i), A.Get_Re(i)*B.Get_Im(i) + A.Get_Im(i)*B.Get_Re(i),i );
+        //C.Set_Re_Im(A.Get_Re(i)*B.Get_Re(i) - A.Get_Im(i)*B.Get_Im(i), A.Get_Re(i)*B.Get_Im(i) + A.Get_Im(i)*B.Get_Re(i),i );
+        retPair.first += A.Get_Re(i)*B.Get_Re(i) - A.Get_Im(i)*B.Get_Im(i);
+        retPair.second += A.Get_Re(i)*B.Get_Im(i) + A.Get_Im(i)*B.Get_Re(i);
     }
-    return C;
+    return retPair;
 }
 
 

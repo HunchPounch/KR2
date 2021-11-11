@@ -3,8 +3,10 @@
 
 
 CComplexVector function1(int n){
+
     CComplexVector A(n);
     CComplexVector B(n);
+    CComplexVector C(n);
     int val_Re;
     int val_Im;
     for(int i=0; i<n;i++){
@@ -23,12 +25,13 @@ CComplexVector function1(int n){
         B.Set_Re_Im(val_Re, val_Im, i);
     }
     cout << endl << endl;
-    A = A + B;
-    return A;
+    C = A + B;
+    return C;
 
 }
 
 CComplexVector function2(int n){
+    CComplexVector C(n);
     CComplexVector A(n);
     CComplexVector B(n);
     int val_Re;
@@ -49,13 +52,13 @@ CComplexVector function2(int n){
         B.Set_Re_Im(val_Re, val_Im, i);
     }
     cout << endl << endl;
-    A = A - B;
-    return A;
+    C = A - B;
+    return C;
 
 }
-
-CComplexVector function3(int n){
-
+pair<int,int> function3(int n){
+    //CComplexVector C(n);
+    pair<int, int> c;
     CComplexVector A(n);
     CComplexVector B(n);
     int val_Re;
@@ -76,8 +79,8 @@ CComplexVector function3(int n){
         B.Set_Re_Im(val_Re, val_Im, i);
     }
     cout << endl << endl;
-    A = A * B;
-    return A;
+    c = A * B;
+    return c;
 
 }
 
@@ -90,6 +93,7 @@ int main()
 
     else cout << "tests passed" << endl << endl;
     int n = 0;
+    pair<int, int> res;
     cout << "Enter dimension of the space:" << endl;
     cin >> n;
     if(n == 0){
@@ -133,15 +137,17 @@ int main()
         }
 
         if(num == 3){
-            A = function3(n);
-            cout << "(";
+            res = function3(n);
+            /*cout << "(";
             for(int i=0;i<n;i++){
                 A.print(i);
                 if(i != n-1){
                     cout << ", ";
                 }
             }
-            cout << ")" << endl << endl;
+            cout << ")" << endl << endl;*/
+
+            cout << res.first << " + " << res.second << "i"<< endl;
             continue;
         }
 
